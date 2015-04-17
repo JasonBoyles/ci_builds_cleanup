@@ -1,9 +1,11 @@
 #!/usr/bin/env ruby
-require 'yaml'
 require 'fog'
 
-# How old of servers are you wanting to delete, in hours.
+# Server age cutoff for deletion in hours.
 older_than = 6
+
+# Dryrun?
+dryrun = false
 
 # loop over the regions
 %w(IAD ORD DFW HKG SYD).each do |datacenter|
@@ -26,11 +28,15 @@ older_than = 6
 
   # Delete them
   servers.each do |server|
-    puts "Deleting Name : #{server.name}, ID: #{server.id} created at #{server.created}"
-    begin
-      server.destroy
-    rescue
-      failed_servers << server
+    if dryrun == 'true'
+      puts "would delete Name : #{server.name}, ID: #{server.id} created at #{server.created}"
+    else
+      puts "Deleting Name : #{server.name}, ID: #{server.id} created at #{server.created}"
+      begin
+        server.destroy
+      rescue
+        failed_servers << server
+      end
     end
   end
   puts 'Nothing to delete' if servers.empty?
