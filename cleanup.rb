@@ -8,7 +8,7 @@ older_than = 6
 dryrun = false
 
 # loop over the regions
-%w(IAD ORD DFW HKG SYD).each do |datacenter|
+%w(IAD DFW HKG SYD).each do |datacenter|
   # Connect to rackspace
   @client = Fog::Compute.new(
     provider: 'rackspace',
