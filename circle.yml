@@ -1,6 +1,8 @@
 machine:
   ruby:
     version: 2.1.5
+  services:
+    docker
 
 dependencies:
   cache_directories:
@@ -13,3 +15,4 @@ test:
   override:
     - bundle exec rubocop
     - bundle exec ruby cleanup.rb
+    - docker build .
