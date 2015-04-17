@@ -16,7 +16,6 @@ class Cleanup
         rackspace_region: datacenter
       )
 
-      # Get all servers starting by "jenkins-test"
       now = Time.new
       servers = @client.servers.all.select do |server|
         created_at = Time.parse(server.created)
