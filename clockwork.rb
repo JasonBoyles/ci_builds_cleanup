@@ -5,7 +5,7 @@ require_relative 'cleanup'
 module Clockwork
   handler do |job|
     puts "Running #{job}"
-    Cleanup.new.servers(6, true)
+    Cleanup.new.servers(6, false)
   end
 
   every(1.hour, 'hourly.job')
