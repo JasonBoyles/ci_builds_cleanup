@@ -2,7 +2,7 @@ machine:
   ruby:
     version: 2.1.5
   services:
-    docker
+    - docker
 
 dependencies:
   cache_directories:
